@@ -1,0 +1,1 @@
+var config = {transfAI:true,adAI:true,jumpAI:true,codeAI:false};
