@@ -1,8 +1,9 @@
-
 var configpage = chrome.extension.getBackgroundPage();
+
 window.onload=function(){ 
-    for(var key in configpage.config){
-        if(!configpage.config[key]){
+    configpage.initStoreConfig();
+    for(var key in configpage.storeConfig){
+        if(!configpage.storeConfig[key]){
             document.getElementById(key).className = "close2 inner";
             document.getElementById(key).parentNode.className= "close1 out";
         }
@@ -22,7 +23,8 @@ window.onload=function(){
          				event.target.parentNode.className=(event.target.parentNode.className=="close1 out")?"open1 out":"close1 out";	
          				event.target.className=(event.target.className=="close2 inner")?"open2 inner":"close2 inner";	
                         var msg = {key:event.target.id,value:event.target.className=="open2 inner"};
-                        configpage.config[msg.key]=msg.value;
+                        // configpage.config[msg.key]=msg.value;
+                        configpage.setStoreConfig(msg.key,msg.value);
                         port.postMessage(msg);//向通道中发送消息    
                     }
          		}

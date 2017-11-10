@@ -287,14 +287,20 @@ document.getElementById("kw").onkeydown = removeAdHander;
 // clip.setHandCursor(true);  	
 
 
+
 //初始化检测测试
 loadCss("jquery.toast");
-initProcess();
 chrome.runtime.onConnect.addListener(function (port) {//建立监听
     if(port.name == "ma"){//判断通道名称
         port.onMessage.addListener(function (msg) {//监听消息
-            config[msg.key]=msg.value;
-            console.log(config);
+			config[msg.key]=msg.value;
+			console.log(config);
         });
     }
+});
+
+//拿到初始化数据后才做操作
+chrome.runtime.sendMessage("storeConfig", function(response){
+	config = response;
+	initProcess();
 });
