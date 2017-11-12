@@ -25,7 +25,7 @@ if ( typeof Object.create !== 'function' ) {
         },
         addToDom: function(){
             var w  = (document.body.clientWidth-450);
-        	var container = $('<div id="promptContainer" style="width:'+w+'px;position: absolute;z-index:999;margin: 200px;padding: 25px;background-color: rgba(0,0,0,0.5);text-align:center;font-size: 100px;border-radius: 40px;"><p style="color: #ffffff;"></p></div>');
+        	var container = $('<div id="promptContainer" style="width:'+w+'px;position: absolute;z-index:999;margin: 200px;padding: 25px;background-color: rgba(0,0,0,0.6);text-align:center;font-size: 100px;border-radius: 40px;"><p style="color: #ffffff;"></p></div>');
 		    container.find("p:eq(0)").text(this.options.text);
 			$('#wrapper').prepend(container);
         },
