@@ -6,7 +6,8 @@ var globalWeb =null;
 var globalMsgNum = 0;
 var config = {transfAI:true,adAI:true,jumpAI:true,codeAI:false};
 var baiduTURL = "http://fanyi.baidu.com/v2transapi?from=zh&to=en&transtype=translang&simple_means_flag=3&query=";
-var hujiangTURL = "https://dict.hjenglish.com/services/Translate.ashx?from=zh-CN&to=en&text=";
+// var hujiangTURL = "https://dict.hjenglish.com/services/Translate.ashx?from=zh-CN&to=en&text=";
+var hujiangTURL = "https://dict.hjenglish.com/v10/dict/translation/cn/en";
 function removeAd(){
 	var divs = document.getElementById("content_left").childNodes;
 	if(divs.length>0){
@@ -157,6 +158,19 @@ function httpRequest(url,callback){
     xhr.send();
 }
 
+function translation(url,data,callback){
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4) {
+        	callback(xhr.responseText);
+        }
+    }
+    xhr.send(data);
+}
+
+
 function isChn(str){
 	var reg = /^[\u4e00-\u9fa5]+$/;
 	return reg.test(str);
@@ -191,10 +205,12 @@ function initProcess(){
 		}
 	}
 	if(config.transfAI){
-		var html = httpRequest(hujiangTURL+document.getElementById("kw").value, function(result){
-			
+		//var html = httpRequest(hujiangTURL+document.getElementById("kw").value, function(result){
+		var formdata = "content=";
+        formdata += document.getElementById("kw").value;
+		var html = translation(hujiangTURL,formdata, function(result){	
 			//transstr = JSON.parse(result).trans_result.data[0].dst;  百度的
-			transstr =  JSON.parse(result).content;  //沪江的
+			transstr =  JSON.parse(result).data.content;  //沪江的
 			if(config.codeAI){
 				transformationCode(transstr);
 			}else{
