@@ -140,7 +140,7 @@ function replaceAd(){
 		clearInterval(globalChekcNum);
 		if(config.jumpAI){
 			// showMsg(["跳转至官网"]);
-			setTimeout(function(){globalWeb.click();},3000);
+			setTimeout(function(){globalWeb.click();},1000);
 			showChromeMsg("搜索信息","搜索到一条官网，并跳转至官网");
 		}
 		globalDivs = [];
