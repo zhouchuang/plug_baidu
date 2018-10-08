@@ -210,7 +210,7 @@ function initProcess(){
         formdata += document.getElementById("kw").value;
 		var html = translation(hujiangTURL,formdata, function(result){	
 			//transstr = JSON.parse(result).trans_result.data[0].dst;  百度的
-			transstr =  JSON.parse(result).data.content;  //沪江的
+			transstr =  JSON.parse(result).data.original_text;  //沪江的
 			if(config.codeAI){
 				transformationCode(transstr);
 			}else{
