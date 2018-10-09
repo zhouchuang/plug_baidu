@@ -23,19 +23,19 @@ function removeAd(){
 	}*/
 
 
+    var first = document.getElementById("content_left").children[0];
+    if(first.className.indexOf("result c-container")==-1  && first.className.length==7){
+        clearInterval(globalChekcNum);
+        document.getElementById("content_left").appendChild(first);
+        var node  = document.createElement('p');
+        node.innerText = "屏蔽了"+first.childNodes.length+"条广告";
+        node.className = "c-gray";
+        node.style  = "padding:5px 0px;color:#4cae4c";
+        document.getElementById("content_left").insertBefore(node,document.getElementById("content_left").children[0]);
 
+    }
     globalCount ++;
-    if(globalCount>=100){
-        var first = document.getElementById("content_left").children[0];
-        if(first.className.indexOf("result c-container")==-1  && first.className.length==7){
-            document.getElementById("content_left").appendChild(first);
-            var node  = document.createElement('p');
-            node.innerText = "屏蔽了"+first.childNodes.length+"条广告";
-            node.className = "c-gray";
-            node.style  = "padding:5px 0px;color:#4cae4c";
-            document.getElementById("content_left").insertBefore(node,document.getElementById("content_left").children[0]);
-            clearInterval(globalChekcNum);
-        }
+    if(globalCount>=200){
         clearInterval(globalChekcNum);
     }
 
@@ -248,7 +248,7 @@ function initProcess(){
 	clearTimeout(globalMsgNum);
 	clearInterval(globalChekcNum);
 	if(config.adAI){
-		globalChekcNum = setInterval(removeAd,20);
+		globalChekcNum = setInterval(removeAd,10);
 	}
 	
 }
