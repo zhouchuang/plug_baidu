@@ -9,7 +9,7 @@ var baiduTURL = "http://fanyi.baidu.com/v2transapi?from=zh&to=en&transtype=trans
 // var hujiangTURL = "https://dict.hjenglish.com/services/Translate.ashx?from=zh-CN&to=en&text=";
 var hujiangTURL = "https://dict.hjenglish.com/v10/dict/translation/cn/en";
 function removeAd(){
-	var divs = document.getElementById("content_left").childNodes;
+	/*var divs = document.getElementById("content_left").childNodes;
 	if(divs.length>0){
 		for(var i=0;i<divs.length;i++){
 			var div  =  divs[i];
@@ -20,8 +20,25 @@ function removeAd(){
 	globalCount ++;
 	if(globalCount>=150){
 		realRemove();
-	}
-	
+	}*/
+
+
+
+    globalCount ++;
+    if(globalCount>=100){
+        var first = document.getElementById("content_left").children[0];
+        if(first.className.indexOf("result c-container")==-1  && first.className.length==7){
+            document.getElementById("content_left").appendChild(first);
+            var node  = document.createElement('p');
+            node.innerText = "屏蔽了"+first.childNodes.length+"条广告";
+            node.className = "c-gray";
+            node.style  = "padding:5px 0px;color:#4cae4c";
+            document.getElementById("content_left").insertBefore(node,document.getElementById("content_left").children[0]);
+            clearInterval(globalChekcNum);
+        }
+        clearInterval(globalChekcNum);
+    }
+
 }
 function realRemove(){
 	clearInterval(globalChekcNum);
