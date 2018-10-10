@@ -27,7 +27,7 @@ function removeAd(){
 
 	if(document.getElementById("content_left")){
         var first = document.getElementById("content_left").children[0];
-        if(first.className.indexOf("result")==-1 ){
+        if(first.className.indexOf("c-container")==-1 ){
            /* console.log( "屏蔽了"+first.children.length+"条广告");
             clearInterval(globalChekcNum);
             document.getElementById("content_left").appendChild(first);
@@ -35,6 +35,7 @@ function removeAd(){
             node.innerText = "屏蔽了"+first.children.length+"条广告";
             node.style  = "padding:5px 0px;color:#4cae4c;";
             document.getElementById("content_left").insertBefore(node,document.getElementById("content_left").children[0]);*/
+           console.log(first.className);
             if(first.className.length==7){
                 adCount += first.children.length;
 		    }else{
