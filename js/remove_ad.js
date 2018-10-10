@@ -28,7 +28,7 @@ function removeAd(){
         clearInterval(globalChekcNum);
         document.getElementById("content_left").appendChild(first);
         var node  = document.createElement('p');
-        node.innerText = "屏蔽了"+first.childNodes.length+"条广告";
+        node.innerText = "屏蔽了"+first.children.length+"条广告";
         node.style  = "padding:5px 0px;color:#4cae4c;";
         document.getElementById("content_left").insertBefore(node,document.getElementById("content_left").children[0]);
 
