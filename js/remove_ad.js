@@ -8,6 +8,8 @@ var config = {transfAI:true,adAI:true,jumpAI:true,codeAI:false};
 var baiduTURL = "http://fanyi.baidu.com/v2transapi?from=zh&to=en&transtype=translang&simple_means_flag=3&query=";
 // var hujiangTURL = "https://dict.hjenglish.com/services/Translate.ashx?from=zh-CN&to=en&text=";
 var hujiangTURL = "https://dict.hjenglish.com/v10/dict/translation/cn/en";
+
+var adCount = 0;
 function removeAd(){
 	/*var divs = document.getElementById("content_left").childNodes;
 	if(divs.length>0){
@@ -23,18 +25,33 @@ function removeAd(){
 	}*/
 
 
-    var first = document.getElementById("content_left").children[0];
-    if(first.className.indexOf("result c-container")==-1  && first.className.length==7){
-        clearInterval(globalChekcNum);
-        document.getElementById("content_left").appendChild(first);
-        var node  = document.createElement('p');
-        node.innerText = "屏蔽了"+first.children.length+"条广告";
-        node.style  = "padding:5px 0px;color:#4cae4c;";
-        document.getElementById("content_left").insertBefore(node,document.getElementById("content_left").children[0]);
+	if(document.getElementById("content_left")){
+        var first = document.getElementById("content_left").children[0];
+        if(first.className.indexOf("result")==-1 ){
+           /* console.log( "屏蔽了"+first.children.length+"条广告");
+            clearInterval(globalChekcNum);
+            document.getElementById("content_left").appendChild(first);
+            var node  = document.createElement('p');
+            node.innerText = "屏蔽了"+first.children.length+"条广告";
+            node.style  = "padding:5px 0px;color:#4cae4c;";
+            document.getElementById("content_left").insertBefore(node,document.getElementById("content_left").children[0]);*/
+            if(first.className.length==7){
+                adCount += first.children.length;
+		    }else{
+                adCount++;
+		    }
+		    document.getElementById("content_left").appendChild(first);
+        }
+	}
 
-    }
     globalCount ++;
     if(globalCount>=200){
+    	if(adCount>0){
+            var node  = document.createElement('p');
+            node.innerText = "屏蔽了"+adCount+"条广告";
+            node.style  = "padding:5px 0px;color:#4cae4c;";
+            document.getElementById("content_left").insertBefore(node,document.getElementById("content_left").children[0]);
+		}
         clearInterval(globalChekcNum);
     }
 
@@ -244,6 +261,7 @@ function initProcess(){
 	
 	globalWeb  = null;
 	globalCount = 0;
+	adCount = 0;
 	clearTimeout(globalMsgNum);
 	clearInterval(globalChekcNum);
 	if(config.adAI){
